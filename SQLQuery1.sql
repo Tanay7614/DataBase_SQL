@@ -34,7 +34,7 @@ delete from employee where emp_name='ram'
 
                -------UNIQUE CONSTRAINTS-----
 
-	CREATE TABLE persons(
+    CREATE TABLE persons(
     person_id INT IDENTITY PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
@@ -65,19 +65,18 @@ INSERT INTO person_skills(person_id,skill_id,updated_at)
 VALUES(3,7,GETDATE());
 
 
-           ------- forgein key, primary key constraints ------
+                            ------- forgein key, primary key constraints ------
 
 		   CREATE TABLE employee1 (Emp_ID INT NOT NULL PRIMARY KEY,
 		                           Emp_Name VARCHAR (40),
-								   Emp_Salary VARCHAR (40)
-								   )
+					   Emp_Salary VARCHAR (40)
+					   )
 		   CREATE TABLE department(Dept_ID INT NOT NULL PRIMARY KEY,
 		                           Dept_Name VARCHAR(40), 
-								   Emp_ID INT NOT NULL,
-								   FOREIGN KEY(Emp_ID) REFERENCES employee1(Emp_ID)
-								   )  
-								   INSERT INTO department(Dept_ID,Dept_Name,Emp_ID )
-                                   VALUES(1,'hr',1)
+					   Emp_ID INT NOT NULL,
+	                                   FOREIGN KEY(Emp_ID) REFERENCES employee1(Emp_ID)
+					   )  
+		   INSERT INTO department(Dept_ID,Dept_Name,Emp_ID ) VALUES(1,'hr',1)
 		   select * from department 
 
 		   --------GROUP BY ORDER BY CLAUSE------
@@ -113,63 +112,63 @@ VALUES(3,7,GETDATE());
 		   ---------Left Join-------
 	 SELECT emp_ID, emp_NAME,emp_address,first_name,email  
 	 FROM employee  
-     LEFT JOIN persons  
-     ON employee.emp_ID = persons.person_id;
+         LEFT JOIN persons  
+         ON employee.emp_ID = persons.person_id;
 
 	       ----------Right join------
 	 SELECT emp_ID, emp_NAME,emp_address,first_name,email  
 	 FROM employee  
-     Right JOIN persons  
-     ON employee.emp_ID = persons.person_id;
+         Right JOIN persons  
+         ON employee.emp_ID = persons.person_id;
 
 	      ----------Full outer join------
 	 SELECT emp_ID, emp_NAME,emp_address,first_name,email  
 	 FROM employee  
-     Full outer JOIN persons  
-     ON employee.emp_ID = persons.person_id;
+         Full outer JOIN persons  
+         ON employee.emp_ID = persons.person_id;
 
 	      ----------INNER join------
 	 SELECT emp_ID, emp_NAME,emp_address,first_name,email  
 	 FROM employee  
-     INNER JOIN persons  
-     ON employee.emp_ID = persons.person_id;
+         INNER JOIN persons  
+         ON employee.emp_ID = persons.person_id;
 
 	       ----------MULTIPLE join------
 
-     CREATE TABLE student(st_ID INT PRIMARY KEY,
-		                  st_Name VARCHAR(40) Not Null, 
-						  st_lastName varchar(30) NOT NULL
-						  )
+         CREATE TABLE student(st_ID INT PRIMARY KEY,
+		          st_Name VARCHAR(40) Not Null, 
+			  st_lastName varchar(30) NOT NULL
+			  )
 	 INSERT INTO student(st_ID,st_Name,st_lastName) VALUES(1,'Maxwell','Warner')
 	 INSERT INTO student(st_ID,st_Name,st_lastName) VALUES(2,'Virat','Kohli')
 	 INSERT INTO student(st_ID,st_Name,st_lastName) VALUES(3,'Mahi','Dhoni')
 
 	 SELECT emp_id,emp_salary, emp_address,first_name,email,st_Name
 	 FROM employee  
-     JOIN persons  
-     ON employee.emp_ID = persons.person_id 
+         JOIN persons  
+         ON employee.emp_ID = persons.person_id 
 	 join student
 	 on student.st_ID=persons.person_id
 
 	 SELECT emp_address,sum(emp_salary) TotalSalary
 	 FROM employee  
-     JOIN persons  
-     ON employee.emp_ID = persons.person_id 
+         JOIN persons  
+         ON employee.emp_ID = persons.person_id 
 	 join student
 	 on student.st_ID=persons.person_id
 	 group by emp_address
 
 	 SELECT emp_address,count(*) TotalEmployee
 	 FROM employee  
-     JOIN persons  
-     ON employee.emp_ID = persons.person_id 
+         JOIN persons  
+         ON employee.emp_ID = persons.person_id 
 	 join student
 	 on student.st_ID=persons.person_id
 	 group by emp_address
 	 
 	 select * from student
 	 select * from persons
-     SELECT * FROM employee 
+         SELECT * FROM employee 
 
 	                --------Cast Function--------
 	 SELECT CAST('2017-08-25' AS datetime);
@@ -186,7 +185,7 @@ VALUES(3,7,GETDATE());
 
 	                  -------Convert Function-------
 
-     SELECT CONVERT(nvarchar, '2017-08-25');
+         SELECT CONVERT(nvarchar, '2017-08-25');
 	 SELECT CONVERT(int, 12.5);
 	 SELECT * FROM employee 
 	 select emp_id,emp_name,start_date,convert( nvarchar ,start_date,103)as convertedDataType from employee
@@ -196,9 +195,9 @@ VALUES(3,7,GETDATE());
 	                   
 	 select Emp_Name from Employee where Emp_Name like 'R%'
 
-     select emp_name from employee where emp_name like '%ha%'
+         select emp_name from employee where emp_name like '%ha%'
 
-     select emp_address from employee where emp_address like '_h%'
+         select emp_address from employee where emp_address like '_h%'
 
 	 select emp_address from employee where emp_address like 'm__%'
 	 SELECT * FROM employee 
@@ -206,21 +205,21 @@ VALUES(3,7,GETDATE());
 	                   --------View Operator-------
 
 	 Create View viewempDepartment
-     as
+         as
 	 SELECT emp_id,emp_salary, emp_address,first_name,email,st_Name
 	 FROM employee  
-     JOIN persons  
-     ON employee.emp_ID = persons.person_id 
+         JOIN persons  
+         ON employee.emp_ID = persons.person_id 
 	 join student on
 	 student.st_ID=persons.person_id
 	 select * from viewempDepartment
 
 	 Create View viewempDepaPer
-     as
+         as
 	 SELECT emp_address,sum(emp_salary) TotalSalary
 	 FROM employee  
-     JOIN persons  
-     ON employee.emp_ID = persons.person_id 
+         JOIN persons  
+         ON employee.emp_ID = persons.person_id 
 	 join student
 	 on student.st_ID=persons.person_id
 	 group by emp_address
@@ -229,28 +228,28 @@ VALUES(3,7,GETDATE());
 	                     ---------Delete Cascade-------
 
 	 select * from persons
-     CREATE TABLE school(sc_ID INT PRIMARY KEY,
-		                  sc_Name VARCHAR(40) Not Null,
-						  emp_id int,
-						  foreign key (emp_ID) references employee(emp_ID)
-	                      On delete set null
-						  )
-     INSERT INTO school(sc_ID,sc_Name,emp_id) VALUES(1,'Private',1)
+         CREATE TABLE school(sc_ID INT PRIMARY KEY,
+		             sc_Name VARCHAR(40) Not Null,
+			     emp_id int,
+			     foreign key (emp_ID) references employee(emp_ID)
+	                     On delete set null
+			     )
+         INSERT INTO school(sc_ID,sc_Name,emp_id) VALUES(1,'Private',1)
 	 INSERT INTO school(sc_ID,sc_Name,emp_id) VALUES(2,'gov',2)
 	 INSERT INTO school(sc_ID,sc_Name,emp_id) VALUES(3,'Bharat',3)
-     select * from school
+         select * from school
 	 SELECT * FROM employee 
 	 delete from employee where emp_name='raunak'
 	 delete from employee where emp_id=3
 
-	                     ---------Update Table---------
+	                     ---------Update Cascade---------
 
-      CREATE TABLE company1(cmp_ID INT PRIMARY KEY,
-		                  cmp_Name VARCHAR(40) Not Null,
-						  st_id int,
-						  foreign key (st_ID) references student(st_ID)
-	                      On update cascade
-						  )
+         CREATE TABLE company1(cmp_ID INT PRIMARY KEY,
+		               cmp_Name VARCHAR(40) Not Null,
+			       st_id int,
+			       foreign key (st_ID) references student(st_ID)
+	                       On update cascade
+			       )
 	  INSERT INTO company1(cmp_ID,cmp_Name,st_id) VALUES(1,'KPMG',1)
 	  INSERT INTO company1(cmp_ID,cmp_Name,st_id) VALUES(2,'Tata',2)
 	  INSERT INTO company1(cmp_ID,cmp_Name,st_id) VALUES(3,'Jaro',3) 
@@ -261,11 +260,11 @@ VALUES(3,7,GETDATE());
 	                     ---------Derived Table--------
 
 	 select * from 
-     (
-     SELECT emp_address,sum(emp_salary) TotalSalary
+         (
+         SELECT emp_address,sum(emp_salary) TotalSalary
 	 FROM employee  
-     JOIN persons  
-     ON employee.emp_ID = persons.person_id 
+         JOIN persons  
+         ON employee.emp_ID = persons.person_id 
 	 join student
 	 on student.st_ID=persons.person_id
 	 group by emp_address
